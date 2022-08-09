@@ -103,7 +103,7 @@ describe("BearMarketBusters", function () {
     );
     expect(
       await ethers.provider.getBalance(bearMarketBustersContract.address)
-    ).to.be.equal("9000000000000000000");
+    ).to.be.equal(ethers.utils.parseEther("9"));
   });
 
   it("Should fail to mint an already minted item", async function () {
