@@ -13,17 +13,30 @@ contract BearMarketBusters is ERC721, Ownable, ReentrancyGuard {
 
     uint256 maxSupply = 10;
 
-    bool private _isSaleActive = false;
+    bool private _isSaleActive = true;
     string private _baseTokenURI = "";
 
-    constructor(string memory _tokenName, string memory _tokenSymbol)
-        ERC721(_tokenName, _tokenSymbol)
-    {}
+    constructor(
+        string memory _tokenName,
+        string memory _tokenSymbol,
+        string memory _bmbBaseTokenURI
+    ) ERC721(_tokenName, _tokenSymbol) {
+        _baseTokenURI = _bmbBaseTokenURI;
+    }
 
     function mintBearMarketBuster(uint256 itemId) public payable nonReentrant {
         require(_isSaleActive, "Sale not yet active");
         require(itemId >= 1 && itemId <= 9, "Wrong itemId");
-        require(itemId**2 <= msg.value, "Wrong price");
+        if (itemId >= 1 && itemId <= 3) {
+            require(msg.value >= 1 * 10**18, "Wrong price");
+        }
+        if (itemId >= 4 && itemId <= 6) {
+            require(msg.value >= 2 * 10**18, "Wrong price");
+        }
+        if (itemId >= 7 && itemId <= 9) {
+            require(msg.value >= 3 * 10**18, "Wrong price");
+        }
+
         _safeMint(msg.sender, itemId);
     }
 
@@ -68,11 +81,8 @@ contract BearMarketBusters is ERC721, Ownable, ReentrancyGuard {
         _safeMint(msg.sender, 0);
     }
 
-    function mintForAddress(uint256 itemId, address _receiver)
-        public
-        onlyOwner
-    {
-        _safeMint(_receiver, itemId);
+    function mintForAddress(address receiver, uint256 itemId) public onlyOwner {
+        _safeMint(receiver, itemId);
     }
 
     function setBaseTokenURI(string memory baseURI) public onlyOwner {
@@ -80,10 +90,10 @@ contract BearMarketBusters is ERC721, Ownable, ReentrancyGuard {
     }
 
     function withdraw() public onlyOwner nonReentrant {
-        // Send 10% to gigiwincs.
+        // 10% to designer.
         // =============================================================================
         (bool gigiwincsSuccess, ) = payable(
-            0x146FB9c3b2C13BA88c6945A759EbFa95127486F4
+            0x371aE80beAF2228ceCA33A62cE3BDd3f09e0f007
         ).call{value: (address(this).balance * 10) / 100}("");
         require(gigiwincsSuccess, "Failed to send 10% to gigiwincs");
         // =============================================================================

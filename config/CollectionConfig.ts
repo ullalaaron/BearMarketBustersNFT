@@ -1,7 +1,15 @@
-const CollectionConfig = {
-  tokenName: "BearMarketBusters",
-  tokenSymbol: "BMB",
-  baseURI: "https://bmb.com/",
+const TestCollectionConfig = {
+  tokenName: "PingoPongoPungo",
+  tokenSymbol: "PPP",
+  baseURI:
+    "https://bmb.mypinata.cloud/ipfs/QmcChygHhP8sHEp9SKQwDUsDMvK2gYTwPEE36vY2FmwVnq/",
 };
 
-export { CollectionConfig };
+const ProdCollectionConfig = {
+  tokenName: "BearMarketBusters",
+  tokenSymbol: "BMB",
+  baseURI:
+    "https://bmb.mypinata.cloud/ipfs/QmVfPyNGcMVzFoFccDNQWH4WNnq6GyxA9bumYjCK4jq6LH/",
+};
+
+export { TestCollectionConfig, ProdCollectionConfig };

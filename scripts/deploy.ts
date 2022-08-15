@@ -4,6 +4,7 @@
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 import { ethers } from "hardhat";
+import { ProdCollectionConfig as contractConfig } from "../config/CollectionConfig";
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
@@ -17,7 +18,11 @@ async function main() {
   const BearMarketBustersContractFactory = await ethers.getContractFactory(
     "BearMarketBusters"
   );
-  const contract = await BearMarketBustersContractFactory.deploy();
+  const contract = await BearMarketBustersContractFactory.deploy(
+    contractConfig.tokenName,
+    contractConfig.tokenSymbol,
+    contractConfig.baseURI
+  );
 
   await contract.deployed();
 
