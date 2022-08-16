@@ -1,17 +1,13 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity ^0.8.0;
+pragma solidity >=0.8.9 <0.9.0;
 
-import "hardhat/console.sol";
-
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract BearMarketBusters is ERC721, Ownable, ReentrancyGuard {
+contract BearMarketBusters is ERC721Enumerable, Ownable, ReentrancyGuard {
     using Strings for uint256;
-
-    uint256 maxSupply = 10;
 
     bool private _isSaleActive = true;
     string private _baseTokenURI = "";

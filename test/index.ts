@@ -114,6 +114,15 @@ describe("BearMarketBusters", function () {
     ).to.be.equal(ethers.utils.parseEther("1"));
   });
 
+  it("Should return correct max supply", async function () {
+    await bearMarketBustersContract.connect(owner).reserveFirstBear();
+    await bearMarketBustersContract
+      .connect(addr2)
+      .mintBearMarketBuster(3, { value: ethers.utils.parseEther("1") });
+
+    expect(await bearMarketBustersContract.totalSupply()).to.be.equal(2);
+  });
+
   it("Should not allow to mint if price is wrong", async function () {
     await expect(
       bearMarketBustersContract
