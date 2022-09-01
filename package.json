@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "hardhat test",
-    "deploy:ganacheUI": "hardhat run scripts/deploy.ts --network ganacheUI"
+    "deploy:ganacheUI": "hardhat run scripts/deploy.ts --network ganacheUI",
+    "deploy:mainnet": "hardhat run scripts/deploy.ts --network mainnet",
+    "withdraw:ganacheUI": "hardhat run scripts/withdraw.ts --network ganacheUI",
+    "withdraw:mainnet": "hardhat run scripts/withdraw.ts --network mainnet"
   },
   "keywords": [],
   "author": "",
